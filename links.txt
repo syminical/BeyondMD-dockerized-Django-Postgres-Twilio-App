@@ -6,3 +6,5 @@ https://docs.djangoproject.com/en/4.0/intro/tutorial01/
 https://docs.djangoproject.com/en/3.2/intro/tutorial01/
 https://docs.docker.com/samples/django/
 https://youtu.be/UmljXZIypDc
+
+admin site: admin, greenbanana
