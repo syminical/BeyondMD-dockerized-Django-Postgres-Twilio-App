@@ -20,6 +20,10 @@ class TaskListView(generic.DetailView):
     model = TaskList
     template_name = 'notes/list.html'
 
+class RenameListView(generic.DetailView):
+    model = TaskList
+    template_name = 'notes/renameList.html'
+
 def addList(request):
     if request.POST['newListName']:
         # this should be sanitized :(
@@ -42,3 +46,24 @@ def deleteList(request, list_id):
     list = get_object_or_404(TaskList, pk=list_id)
     list.delete()
     return HttpResponseRedirect(reverse('notes:index'))
+
+def updateListName(request, list_id):
+    if request.POST['newListName']:
+        # this should be sanitized :(
+        new_list_name = request.POST['newListName']
+        if  len(new_list_name) <= TaskList._meta.get_field('name').max_length:
+            # user access should be checked
+            list = get_object_or_404(TaskList, pk=list_id)
+            list.name = new_list_name
+            list.save()
+            return HttpResponseRedirect(reverse('notes:index'))
+        else:
+            return render(request, 'notes/renameList.html', {
+                'error_message': "That name is too long! (max 34 characters)",
+                'tasklist': get_object_or_404(TaskList, pk=list_id)
+            })
+    else:
+        return render(request, 'notes/renameList.html', {
+            'error_message': "Please enter a new list name!",
+            'tasklist': get_object_or_404(TaskList, pk=list_id)
+        })

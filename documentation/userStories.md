@@ -6,6 +6,7 @@
 2. ### __As a user, I want to delete lists, so that I can get rid of clutter.__
     - _Implemented in index. Each list now has its own delete button._
 3. ### __As a user, I want to rename lists, so that I can fix mistakes.__
+    - _Implemented in index and /renameList. Each list now has an edit button that takes you to a renaming page._
 4. ### __As a user, I want to open a task list, so that I can start working on it.__
    - _Implemented in index. Each list name is a link to its own page._
 5. ### __As a user, I want to close a task list, so that I can see all my lists again.__
