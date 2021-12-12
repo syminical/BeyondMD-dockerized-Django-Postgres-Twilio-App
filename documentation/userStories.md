@@ -2,6 +2,7 @@
 ---
 ## Task Lists
 1. ### __As a user, I want to create lists, so that I can start planning tasks.__
+    - _Implemented in index. There is a form at the top to name and create new lists._
 2. ### __As a user, I want to delete lists, so that I can get rid of clutter.__
 3. ### __As a user, I want to rename lists, so that I can fix mistakes.__
 4. ### __As a user, I want to open a task list, so that I can start working on it.__

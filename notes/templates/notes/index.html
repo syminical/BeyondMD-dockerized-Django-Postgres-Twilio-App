@@ -20,15 +20,41 @@
     <div class="container">
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="text-center">
-            {% if task_lists %}
-                <ul>
-                    {% for list in task_lists %}
-                        <li><a href="/list/{{ list.pk }}">{{ list.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No lists are available.</p>
-            {% endif %}
+            <div class="new-list">
+                {% if error_message %}
+                    <p>{{ error_messag }}</p>
+                {% endif %}
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:addList' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <label class="visually-hidden" for="inlineFormInputGroupListName">listName</label>
+                      <div class="input-group">
+                        <div class="input-group-text">♥</div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inlineFormInputGroupListName"
+                          placeholder="New List"
+                          name='newListName'
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">+</button>
+                    </div>
+                </form>
+            </div>   
+            <div class="lists"
+                {% if task_lists %}
+                    <ul>
+                        {% for list in task_lists %}
+                            <li><a href="{% url 'notes:list' list.pk %}">{{ list.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No lists are available.</p>
+                {% endif %}
+            </div>
         </div>
       </div>
     </div>
