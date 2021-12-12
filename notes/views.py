@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import reverse
 
@@ -36,3 +36,9 @@ def addList(request):
         return render(request, 'notes/index.html', {
             'error_message': "Please enter a name for the new list!"
         })
+
+def deleteList(request, list_id):
+    # user access should be checked
+    list = get_object_or_404(TaskList, pk=list_id)
+    list.delete()
+    return HttpResponseRedirect(reverse('notes:index'))

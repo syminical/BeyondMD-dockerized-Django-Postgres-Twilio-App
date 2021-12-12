@@ -44,11 +44,17 @@
                     </div>
                 </form>
             </div>   
-            <div class="lists"
+            <div class="lists">
                 {% if task_lists %}
                     <ul>
                         {% for list in task_lists %}
-                            <li><a href="{% url 'notes:list' list.pk %}">{{ list.name }}</a></li>
+                            <div class="task-list-wrapper">
+                                <form action="{% url 'notes:deleteList' list.id %}" method="post">
+                                    {% csrf_token %}
+                                    <li><a href="{% url 'notes:list' list.id %}">{{ list.name }}</a></li>
+                                    <button type="submit" class="btn btn-primary">X</button>
+                                </form>
+                            </div>
                         {% endfor %}
                     </ul>
                 {% else %}
