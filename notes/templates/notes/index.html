@@ -22,7 +22,7 @@
         <div class="text-center">
             <div class="new-list">
                 {% if error_message %}
-                    <p>{{ error_messag }}</p>
+                    <p>{{ error_message }}</p>
                 {% endif %}
                 <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:addList' %}" method="post">
                     {% csrf_token %}
@@ -49,9 +49,12 @@
                     <ul>
                         {% for list in task_lists %}
                             <div class="task-list-wrapper">
+                                <li><a href="{% url 'notes:list' list.id %}">{{ list.name }}</a></li>
+                                <a href="{% url 'notes:renameList' list.id %}">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </a>
                                 <form action="{% url 'notes:deleteList' list.id %}" method="post">
                                     {% csrf_token %}
-                                    <li><a href="{% url 'notes:list' list.id %}">{{ list.name }}</a></li>
                                     <button type="submit" class="btn btn-primary">X</button>
                                 </form>
                             </div>
