@@ -1,14 +1,19 @@
 # User Stories
+---
 ## Task Lists
-1. As a user, I want to create lists, so that I can start planning tasks.
-2. As a user, I want to delete lists, so that I can get rid of clutter.
-3. As a user, I want to rename lists, so that I can fix mistakes.
-4. As a user, I want to open a task list, so that I can start working on it.
-5. As a user, I want to close a task list, so that I can see all my lists again.
+1. ### __As a user, I want to create lists, so that I can start planning tasks.__
+2. ### __As a user, I want to delete lists, so that I can get rid of clutter.__
+3. ### __As a user, I want to rename lists, so that I can fix mistakes.__
+4. ### __As a user, I want to open a task list, so that I can start working on it.__
+   - _Implemented in index. Each list name is a link to its own page._
+5. ### __As a user, I want to close a task list, so that I can see all my lists again.__
+   - _Possible by using the browser's back feature to return to index._
+---
 ## Tasks
-1. As a user, I want to add new tasks to my list, so that I can keep track of them.
-2. As a user, I want to mark tasks as completed, so that I can tell what I need to work on.
-3. As a user, I want to edit tasks, so that I can fix mistakes.
-4.  As a user, I want to delete tasks, so that I can clean up my list.
+1. ### __As a user, I want to add new tasks to my list, so that I can keep track of them.__
+2. ### __As a user, I want to mark tasks as completed, so that I can tell what I need to work on.__
+3. ### __As a user, I want to edit tasks, so that I can fix mistakes.__
+4. ### __As a user, I want to delete tasks, so that I can clean up my list.__
+---
 ## Meta
-1.  As a user, I want to protect my system, so that only I can access it.
+1. ### __As a user, I want to protect my system, so that only I can access it.__
