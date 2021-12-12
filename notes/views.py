@@ -13,3 +13,7 @@ class IndexView(generic.ListView):
         Return all lists available.
         """
         return TaskList.objects.all()
+
+class TaskListView(generic.DetailView):
+    model = TaskList
+    template_name = 'notes/list.html'
