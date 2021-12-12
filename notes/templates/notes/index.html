@@ -6,28 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>DP Notes</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    {% comment %} <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
     <!-- Google Fonts Roboto -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
     />
     <!-- MDB -->
-    <link rel="stylesheet" href="{% static 'MDB/css/mdb.dark.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'MDB/css/mdb.dark.min.css' %}" /> {% endcomment %}
   </head>
   <body>
     <!-- Start your project here-->
     <div class="container">
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="text-center">
-          
+            {% if task_lists %}
+                <ul>
+                    {% for list in task_lists %}
+                        <li><a href="/list/{{ list.pk }}">{{ list.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No lists are available.</p>
+            {% endif %}
         </div>
       </div>
     </div>
     <!-- End your project here-->
 
     <!-- MDB -->
-    <script type="text/javascript" src="{% static 'MDB/js/mdb.min.js' %}"></script>
+    {% comment %} <script type="text/javascript" src="{% static 'MDB/js/mdb.min.js' %}"></script> {% endcomment %}
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
   </body>
