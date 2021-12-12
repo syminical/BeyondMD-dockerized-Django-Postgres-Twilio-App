@@ -24,7 +24,17 @@
             {% if tasklist.tasks > 0 %}
                 <ol>
                     {% for task in tasklist.task_set.all %}
+                    <div class=task-wrapper>
                         <li><p>{{ task.text }}</p></li>
+                        <form action="{% url 'notes:toggleTask' tasklist.id task.id %}" method="post">
+                            {% csrf_token %}
+                            {% if task.completed %}
+                                <button type="submit" class="btn btn-primary">C</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-primary">I</button>
+                            {% endif %}
+                        </form>
+                    </div>
                     {% endfor %}
                 </ol>
             {% else %}

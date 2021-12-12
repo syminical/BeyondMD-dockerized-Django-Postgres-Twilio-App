@@ -6,6 +6,8 @@ from django.urls import reverse
 from .models import Task, TaskList
 
 # Create your views here.
+
+# Task Lists
 class IndexView(generic.ListView):
     template_name = 'notes/index.html'
     context_object_name = 'task_lists'
@@ -67,3 +69,11 @@ def updateListName(request, list_id):
             'error_message': "Please enter a new list name!",
             'tasklist': get_object_or_404(TaskList, pk=list_id)
         })
+
+# Tasks
+def toggleTask(request, tasklist_id, task_id):
+    # user access should be checked
+    task = get_object_or_404(Task, pk=task_id)
+    task.completed = not task.completed
+    task.save()
+    return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
