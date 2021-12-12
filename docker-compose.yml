@@ -6,7 +6,7 @@ services:
     image: postgres
     volumes:
       #- ./data/db:/var/lib/postgresql/data # I couldn't get this to work with docker for windows
-      - pgdata:/var/lib/postgresql/data # docker for windows work-around. May need to re-run after creating volume to fix errors.
+      - pgNotesData:/var/lib/postgresql/data # docker for windows work-around. May need to re-run after creating volume to fix errors.
     environment:
       - POSTGRES_PASSWORD=postgres
   web:
@@ -24,4 +24,4 @@ services:
       - db
 
 volumes:
-  pgdata:
+  pgNotesData:
