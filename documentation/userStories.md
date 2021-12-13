@@ -11,6 +11,7 @@
    - _Implemented in index. Each list name is a link to its own page._
 5. ### __As a user, I want to close a task list, so that I can see all my lists again.__
    - _Possible by using the browser's back feature to return to index._
+   - _Implemented in /list. There is a button with an arrow at the top of each list that will take you back to this TaskList list._
 ---
 ## Tasks
 1. ### __As a user, I want to add new tasks to my list, so that I can keep track of them.__
