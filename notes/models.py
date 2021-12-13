@@ -5,7 +5,6 @@ from django.db import models
 # One TaskList can have 0 or more Tasks.
 class TaskList(models.Model):
     name = models.CharField(max_length=34)
-    tasks = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
