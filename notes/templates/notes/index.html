@@ -73,6 +73,48 @@
                   </ul>
                 {% endif %}
             </div>
+            <br>
+            <ul class="list-group">
+              <h2> Authy </h2>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:addAuth' %}" method="post">
+                  {% csrf_token %}
+                  <div class="input-group">
+                    <div class="input-group-text">phone number</div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupListName"
+                      placeholder="8001234567"
+                      name='phoneNumber'
+                    />
+                    <button type="submit" class="btn btn-primary">Get Code</button>
+                  </div>
+                </form>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:verifyAuth' %}" method="post">
+                  {% csrf_token %}
+                  <div class="input-group">
+                    <div class="input-group-text">Code</div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupListName"
+                      placeholder="123456"
+                      name='code'
+                    />
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                  </div>
+                </form>
+              </li>
+              {% if auth_message %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div class="alert alert-primary" role="alert">
+                    <p>{{ auth_message }}</p>
+                  </div>
+                </li>
+              {% endif %}
         </div>
       </div>
     </div>

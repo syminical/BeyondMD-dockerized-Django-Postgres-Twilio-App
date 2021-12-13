@@ -1,11 +1,16 @@
+import os
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import reverse
 
-from .models import Task, TaskList
+from .models import Auth, Task, TaskList
 
+from twilio.rest import Client
 # Create your views here.
+
+authyClient = Client(os.environ['AUTHY_SID'], os.environ['AUTHY_SECRET'])
 
 # Task Lists
 class IndexView(generic.ListView):
@@ -132,3 +137,55 @@ def updateTaskText(request, task_id):
             'error_message': "Please enter some text for the task!",
             'task': get_object_or_404(Task, pk=task_id)
         })
+
+# authy
+def addAuth(request):
+    if request.POST['phoneNumber']:
+        # this should be sanitized :(
+        phone_number = request.POST['phoneNumber']
+        if  len(phone_number) == 10:
+            
+            if Auth.objects.all():
+                a = Auth.objects.get(pk=1)
+                a.number = f'+1{phone_number}'
+            else:
+                a = Auth(number=f'+1{phone_number}')
+            a.save()
+            v = authyClient.verify.services(os.environ['AUTHY_SERVICE']).verifications.create(to=a.number, channel='sms')
+            return render(request, 'notes/index.html', {
+                'auth_message': "Authy request sent! Enter your code to verify.",
+                'task_lists': TaskList.objects.all()
+            })
+        else:
+            return render(request, 'notes/index.html', {
+                'auth_message': "That is too long! Start with the area code (max 10 characters)",
+                'task_lists': TaskList.objects.all()
+            })
+    else:
+        return render(request, 'notes/index.html', {
+            'auth_message': "Please enter a phone number, starting with the area code!",
+            'task_lists': TaskList.objects.all()
+        })
+
+def verifyAuth(request):
+    if request.POST['code']:
+        # this should be sanitized :(
+        code = request.POST['code']
+        if  len(code) == 6:
+            a = Auth.objects.get(pk=1)
+            if a:
+                v = authyClient.verify.services(os.environ['AUTHY_SERVICE']).verification_checks.create(to=a.number, code=code)
+                return render(request, 'notes/index.html', {
+                    'auth_message': f'Authy verify status: {v.status}',
+                    'task_lists': TaskList.objects.all()
+                })
+            else:
+                return render(request, 'notes/index.html', {
+                    'auth_message': "Enter a phone number above first to verify.",
+                    'task_lists': TaskList.objects.all()
+                })
+        else:
+            return render(request, 'notes/index.html', {
+                'auth_message': "The authy code should be 6 digits.",
+                'task_lists': TaskList.objects.all()
+            })

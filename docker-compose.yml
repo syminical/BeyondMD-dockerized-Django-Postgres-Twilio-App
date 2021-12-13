@@ -20,6 +20,9 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - AUTHY_SID=SKaaedaca989388aaab76615d9dafa6f34
+      - AUTHY_SECRET=j6PYc6jGyEWHicNyJ2JOp48FN1GD8qM3
+      - AUTHY_SERVICE=VA67f1b0ce60f032806556659b8b5fa76d
     depends_on:
       - db
 
