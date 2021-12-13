@@ -21,7 +21,7 @@
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="text-center">
             <div class="rename-list">
-                <h1> Please enter a new name for {{ tasklist.name }}:
+                <h1>Please enter a new name for {{ tasklist.name }}:</h1>
                 <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:updateListName' tasklist.id %}" method="post">
                     {% csrf_token %}
                     <div class="col-12">
