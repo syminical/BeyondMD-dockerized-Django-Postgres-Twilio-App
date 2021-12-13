@@ -77,3 +77,24 @@ def toggleTask(request, tasklist_id, task_id):
     task.completed = not task.completed
     task.save()
     return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
+
+def addTask(request, tasklist_id):
+    if request.POST['newTaskText']:
+        # this should be sanitized :(
+        new_task_text = request.POST['newTaskText']
+        if  len(new_task_text) <= Task._meta.get_field('text').max_length:
+            # user access should be checked
+            l = get_object_or_404(TaskList, pk=tasklist_id) # make sure list exists
+            t = Task(task_list=l, text=new_task_text)
+            t.save()
+            return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
+        else:
+            return render(request, 'notes/list.html', {
+                'error_message': "That is too long! (max 120 characters)",
+                'tasklist': get_object_or_404(TaskList, pk=tasklist_id)
+            })
+    else:
+        return render(request, 'notes/list.html', {
+            'error_message': "Please enter some text for the new task!",
+            'tasklist': get_object_or_404(TaskList, pk=tasklist_id)
+        })

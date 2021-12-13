@@ -21,25 +21,51 @@
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="text-center">
             <h1>{{ tasklist.name }}</h1>
-            {% if tasklist.tasks > 0 %}
-                <ol>
-                    {% for task in tasklist.task_set.all %}
-                    <div class=task-wrapper>
-                        <li><p>{{ task.text }}</p></li>
-                        <form action="{% url 'notes:toggleTask' tasklist.id task.id %}" method="post">
-                            {% csrf_token %}
-                            {% if task.completed %}
-                                <button type="submit" class="btn btn-primary">C</button>
-                            {% else %}
-                                <button type="submit" class="btn btn-primary">I</button>
-                            {% endif %}
-                        </form>
+            <div class="new-list">
+                {% if error_message %}
+                    <p>{{ error_message }}</p>
+                {% endif %}
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:addTask' tasklist.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <label class="visually-hidden" for="inlineFormInputGroupTaskText">taskText</label>
+                      <div class="input-group">
+                        <div class="input-group-text">♥</div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inlineFormInputGroupTaskText"
+                          placeholder="New Task"
+                          name='newTaskText'
+                        />
+                      </div>
                     </div>
-                    {% endfor %}
-                </ol>
-            {% else %}
-                <p>No tasks are available.</p>
-            {% endif %}
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">+</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tasks">    
+                {% if tasklist.tasks > 0 %}
+                    <ol>
+                        {% for task in tasklist.task_set.all %}
+                        <div class=task-wrapper>
+                            <li><p>{{ task.text }}</p></li>
+                            <form action="{% url 'notes:toggleTask' tasklist.id task.id %}" method="post">
+                                {% csrf_token %}
+                                {% if task.completed %}
+                                    <button type="submit" class="btn btn-primary">C</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary">I</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <p>No tasks are available.</p>
+                {% endif %}
+            </div>
         </div>
       </div>
     </div>
