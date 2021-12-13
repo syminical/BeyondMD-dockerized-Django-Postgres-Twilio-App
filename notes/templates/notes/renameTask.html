@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>DP Notes</title>
+    <!-- Font Awesome -->
+    {% comment %} <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="{% static 'MDB/css/mdb.dark.min.css' %}" /> {% endcomment %}
+  </head>
+  <body>
+    <!-- Start your project here-->
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="text-center">
+            <div class="rename-list">
+                <h1> Please modify the text below:</h1>
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:updateTaskText' task.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <textarea class="form-control" name='newTaskText'>{{ task.text }}</textarea>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    {% comment %} <script type="text/javascript" src="{% static 'MDB/js/mdb.min.js' %}"></script> {% endcomment %}
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

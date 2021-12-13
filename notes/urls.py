@@ -14,5 +14,7 @@ urlpatterns = [
     # tasks
     path('toggleTask/<int:tasklist_id>/<int:task_id>', views.toggleTask, name='toggleTask'),
     path('addTask/<int:tasklist_id>', views.addTask, name='addTask'),
-    path('deleteTask/<int:tasklist_id>/<int:task_id>', views.deleteTask, name='deleteTask')
+    path('deleteTask/<int:tasklist_id>/<int:task_id>', views.deleteTask, name='deleteTask'),
+    path('renameTask/<int:pk>', views.RenameTaskView.as_view(), name='renameTask'),
+    path('updateTaskName/<int:task_id>', views.updateTaskText, name='updateTaskText')
 ]

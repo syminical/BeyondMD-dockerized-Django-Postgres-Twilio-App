@@ -18,6 +18,7 @@
 2. ### __As a user, I want to mark tasks as completed, so that I can tell what I need to work on.__
     - _Implemented in /list. Each task now has a toggle button to mark completion._
 3. ### __As a user, I want to edit tasks, so that I can fix mistakes.__
+    - _Implemented in /list. Each task now has an edit button that takes you to an editing page._
 4. ### __As a user, I want to delete tasks, so that I can clean up my list.__
     - _Implemented in /list. Each task now has a button to delete it._
 ---
