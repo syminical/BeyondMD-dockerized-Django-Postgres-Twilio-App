@@ -1,6 +1,9 @@
-multiple accounts with separate lists
-sanitize user input
-    https://pypi.org/project/bleach/
-validate user access and object ownership for CRUD
-interact with postgres through the F() function to avoid race conditions
-in-page back buttons (browser back may not be so direct sometimes)
+- multiple accounts with separate lists
+- sanitize user input
+    - https://pypi.org/project/bleach/
+- validate user access and object ownership for CRUD
+- interact with postgres through the F() function to avoid race conditions
+- in-page back buttons (browser back may not be so direct sometimes)
+- better styling
+    - accessability
+    - responsive design
