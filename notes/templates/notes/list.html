@@ -5,17 +5,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>DP Notes</title>
-    {% comment %} <!-- Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
     <!-- Google Fonts Roboto -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
     />
-    <!-- MDB -->
-    <link rel="stylesheet" href="{% static 'MDB/css/mdb.dark.min.css' %}" /> {% endcomment %}
+    <!-- BS -->
+    <link rel="stylesheet" href="{% static 'BS/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'notes/css/index.css' %}" />
   </head>
-  <body>
     <!-- Start your project here-->
     <div class="container">
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
@@ -23,54 +23,62 @@
             <h1>{{ tasklist.name }}</h1>
             <div class="new-list">
                 {% if error_message %}
-                    <p>{{ error_message }}</p>
+                    <div class="alert alert-danger" role="alert">
+                        <p>{{ error_message }}</p>
+                    </div>
                 {% endif %}
                 <form class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'notes:addTask' tasklist.id %}" method="post">
                     {% csrf_token %}
                     <div class="col-12">
-                      <label class="visually-hidden" for="inlineFormInputGroupTaskText">taskText</label>
-                      <div class="input-group">
-                        <div class="input-group-text">♥</div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="inlineFormInputGroupTaskText"
-                          placeholder="New Task"
-                          name='newTaskText'
-                        />
-                      </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">+</button>
+                        <label class="visually-hidden" for="inlineFormInputGroupTaskText">taskText</label>
+                        <div class="input-group">
+                            <a class="input-group-text" href="{% url 'notes:index' %}"><i class="fas fa-arrow-left"></i></a>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="inlineFormInputGroupTaskText"
+                            placeholder="New Task"
+                            name='newTaskText'
+                            />
+                            <button type="submit" class="btn btn-primary">+</button>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="tasks">    
                 {% if tasklist.task_set.all %}
-                    <ol>
+                <ul class="list-group">
                         {% for task in tasklist.task_set.all %}
                         <div class=task-wrapper>
-                            <li><p>{{ task.text }}</p></li>
-                            <form action="{% url 'notes:toggleTask' tasklist.id task.id %}" method="post">
-                                {% csrf_token %}
-                                {% if task.completed %}
-                                    <button type="submit" class="btn btn-primary">C</button>
-                                {% else %}
-                                    <button type="submit" class="btn btn-primary">I</button>
-                                {% endif %}
-                            </form>
-                            <a href="{% url 'notes:renameTask' task.id %}">
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                            </a>
-                            <form action="{% url 'notes:deleteTask' tasklist.id task.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-primary">X</button>
-                            </form>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ task.text }}
+                                <div class="btn-group" role="group" aria-label="Task Buttons">
+                                    <form action="{% url 'notes:toggleTask' tasklist.id task.id %}" method="post">
+                                        {% csrf_token %}
+                                        {% if task.completed %}
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-secondary"><i class="fas fa-hourglass-half"></i></button>
+                                        {% endif %}
+                                    </form>
+                                    <a href="{% url 'notes:renameTask' task.id %}">
+                                        <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                    </a>
+                                    <form action="{% url 'notes:deleteTask' tasklist.id task.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </li>
                         </div>
                         {% endfor %}
-                    </ol>
+                    </ul>
                 {% else %}
-                    <p>No tasks are available.</p>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-center align-items-center">
+                      No tasks are available.
+                    </li>
+                  </ul>
                 {% endif %}
             </div>
         </div>
@@ -78,8 +86,8 @@
     </div>
     <!-- End your project here-->
 
-    <!-- MDB -->
-    {% comment %} <script type="text/javascript" src="{% static 'MDB/js/mdb.min.js' %}"></script> {% endcomment %}
+    <!-- BS -->
+    <script type="text/javascript" src="{% static 'BS/js/bootstrap.min.js' %}"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
   </body>

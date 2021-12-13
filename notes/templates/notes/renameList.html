@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>DP Notes</title>
     <!-- Font Awesome -->
-    {% comment %} <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
     <!-- Google Fonts Roboto -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
     />
-    <!-- MDB -->
-    <link rel="stylesheet" href="{% static 'MDB/css/mdb.dark.min.css' %}" /> {% endcomment %}
+    <!-- BS -->
+    <link rel="stylesheet" href="{% static 'BS/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'notes/css/index.css' %}" />
   </head>
   <body>
     <!-- Start your project here-->
@@ -43,15 +44,17 @@
                 </form>
             </div>
             {% if error_message %}
+              <div class="alert alert-danger" role="alert">
                 <p>{{ error_message }}</p>
+              </div>
             {% endif %}
         </div>
       </div>
     </div>
     <!-- End your project here-->
 
-    <!-- MDB -->
-    {% comment %} <script type="text/javascript" src="{% static 'MDB/js/mdb.min.js' %}"></script> {% endcomment %}
+    <!-- BS -->
+    <script type="text/javascript" src="{% static 'BS/js/bootstrap.min.js' %}"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
   </body>
