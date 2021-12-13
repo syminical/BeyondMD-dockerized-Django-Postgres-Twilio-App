@@ -15,8 +15,6 @@
 ## Tasks
 1. ### __As a user, I want to add new tasks to my list, so that I can keep track of them.__
     - _Implemented in /list. There is a form at the top to enter task text and add it to the list._
-        - There's a bug here. It works for a list that already has tasks, but not an empty list.
-          - I can see them added to empty lists in /admin, but it's not visible in /list.html
 2. ### __As a user, I want to mark tasks as completed, so that I can tell what I need to work on.__
     - _Implemented in /list. Each task now has a toggle button to mark completion._
 3. ### __As a user, I want to edit tasks, so that I can fix mistakes.__

@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div class="tasks">    
-                {% if tasklist %}
+                {% if tasklist.task_set.all %}
                     <ol>
                         {% for task in tasklist.task_set.all %}
                         <div class=task-wrapper>
