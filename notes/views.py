@@ -84,7 +84,7 @@ def addTask(request, tasklist_id):
         new_task_text = request.POST['newTaskText']
         if  len(new_task_text) <= Task._meta.get_field('text').max_length:
             # user access should be checked
-            get_object_or_404(TaskList, pk=tasklist_id) # make sure list exists
+            l = get_object_or_404(TaskList, pk=tasklist_id) # make sure list exists
             t = Task(task_list=l, text=new_task_text)
             t.save()
             return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
