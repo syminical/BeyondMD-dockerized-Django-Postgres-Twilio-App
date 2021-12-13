@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div class="tasks">    
-                {% if tasklist.tasks > 0 %}
+                {% if tasklist %}
                     <ol>
                         {% for task in tasklist.task_set.all %}
                         <div class=task-wrapper>
@@ -58,6 +58,10 @@
                                 {% else %}
                                     <button type="submit" class="btn btn-primary">I</button>
                                 {% endif %}
+                            </form>
+                            <form action="{% url 'notes:deleteTask' tasklist.id task.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">X</button>
                             </form>
                         </div>
                         {% endfor %}

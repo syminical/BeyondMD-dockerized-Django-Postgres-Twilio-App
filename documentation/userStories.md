@@ -21,6 +21,7 @@
     - _Implemented in /list. Each task now has a toggle button to mark completion._
 3. ### __As a user, I want to edit tasks, so that I can fix mistakes.__
 4. ### __As a user, I want to delete tasks, so that I can clean up my list.__
+    - _Implemented in /list. Each task now has a button to delete it._
 ---
 ## Meta
 1. ### __As a user, I want to protect my system, so that only I can access it.__

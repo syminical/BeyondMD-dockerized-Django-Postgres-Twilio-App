@@ -45,8 +45,8 @@ def addList(request):
 
 def deleteList(request, list_id):
     # user access should be checked
-    list = get_object_or_404(TaskList, pk=list_id)
-    list.delete()
+    l = get_object_or_404(TaskList, pk=list_id)
+    l.delete()
     return HttpResponseRedirect(reverse('notes:index'))
 
 def updateListName(request, list_id):
@@ -55,9 +55,9 @@ def updateListName(request, list_id):
         new_list_name = request.POST['newListName']
         if  len(new_list_name) <= TaskList._meta.get_field('name').max_length:
             # user access should be checked
-            list = get_object_or_404(TaskList, pk=list_id)
-            list.name = new_list_name
-            list.save()
+            l = get_object_or_404(TaskList, pk=list_id)
+            l.name = new_list_name
+            l.save()
             return HttpResponseRedirect(reverse('notes:index'))
         else:
             return render(request, 'notes/renameList.html', {
@@ -73,9 +73,9 @@ def updateListName(request, list_id):
 # Tasks
 def toggleTask(request, tasklist_id, task_id):
     # user access should be checked
-    task = get_object_or_404(Task, pk=task_id)
-    task.completed = not task.completed
-    task.save()
+    t = get_object_or_404(Task, pk=task_id)
+    t.completed = not t.completed
+    t.save()
     return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
 
 def addTask(request, tasklist_id):
@@ -84,7 +84,7 @@ def addTask(request, tasklist_id):
         new_task_text = request.POST['newTaskText']
         if  len(new_task_text) <= Task._meta.get_field('text').max_length:
             # user access should be checked
-            l = get_object_or_404(TaskList, pk=tasklist_id) # make sure list exists
+            get_object_or_404(TaskList, pk=tasklist_id) # make sure list exists
             t = Task(task_list=l, text=new_task_text)
             t.save()
             return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
@@ -98,3 +98,9 @@ def addTask(request, tasklist_id):
             'error_message': "Please enter some text for the new task!",
             'tasklist': get_object_or_404(TaskList, pk=tasklist_id)
         })
+
+def deleteTask(request, tasklist_id, task_id):
+    # user access should be checked
+    t = get_object_or_404(Task, pk=task_id)
+    t.delete()
+    return HttpResponseRedirect(reverse('notes:list', args=[tasklist_id]))
