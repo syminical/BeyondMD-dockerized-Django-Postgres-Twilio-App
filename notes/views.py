@@ -36,11 +36,13 @@ def addList(request):
             return HttpResponseRedirect(reverse('notes:index'))
         else:
             return render(request, 'notes/index.html', {
-                'error_message': "That name is too long! (max 34 characters)"
+                'error_message': "That name is too long! (max 34 characters)",
+                'task_lists': TaskList.objects.all()
             })
     else:
         return render(request, 'notes/index.html', {
-            'error_message': "Please enter a name for the new list!"
+            'error_message': "Please enter a name for the new list!",
+            'task_lists': TaskList.objects.all()
         })
 
 def deleteList(request, list_id):
